@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, TextInput, Button, Text, StyleSheet} from 'react-native';
+import {
+  SafeAreaView,
+  TextInput,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import encryptText from './components/Encryptor';
 
@@ -17,11 +23,15 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter text to encrypt"
+        placeholder="Enter text to hash"
         value={inputText}
         onChangeText={setInputText}
       />
-      <Button title="Encrypt" onPress={() => handleEncrypt(inputText)} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleEncrypt(inputText)}>
+        <Text style={styles.buttonText}>Hash!</Text>
+      </TouchableOpacity>
       {hashedText ? (
         <Text style={styles.result}>
           Hashed Output: {hashedText} (Copied to clipboard)
@@ -43,6 +53,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
+  },
+  button: {
+    backgroundColor: '#eebb55',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 16,
   },
   result: {
     marginTop: 12,
